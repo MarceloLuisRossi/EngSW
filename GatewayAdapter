@@ -1,0 +1,20 @@
+package adapter;
+
+/**
+ * ADAPTER: implementa a interface Target e traduz as chamadas
+ * para a interface do Adaptee (Object Adapter - composição).
+ */
+public class GatewayAdapter implements ProcessadorPagamento {
+
+    private final GatewayLegado gateway;
+
+    public GatewayAdapter(GatewayLegado gateway) {
+        this.gateway = gateway;
+    }
+
+    @Override
+    public void pagar(double valorReais) {
+        long centavos = Math.round(valorReais * 100);   // converte a unidade
+        gateway.efetuarCobranca(centavos, "BRL");       // delega ao Adaptee
+    }
+}
