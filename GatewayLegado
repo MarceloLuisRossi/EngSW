@@ -1,0 +1,11 @@
+package adapter;
+
+/**
+ * ADAPTEE: classe de terceiros (ou legada) com interface incompatível.
+ * Não podemos alterar este código.
+ */
+public class GatewayLegado {
+    public void efetuarCobranca(long centavos, String moeda) {
+        System.out.println("[GatewayLegado] Cobrança de " + centavos + " centavos em " + moeda);
+    }
+}

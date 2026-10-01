@@ -1,0 +1,71 @@
+interface Visitor {
+    void visit(Livro livro);
+    void visit(Eletronico eletronico);
+}
+
+interface Produto {
+    void accept(Visitor visitor);
+}
+
+class Livro implements Produto {
+    private double preco;
+
+    public Livro(double preco) {
+        this.preco = preco;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+}
+
+class Eletronico implements Produto {
+    private double preco;
+
+    public Eletronico(double preco) {
+        this.preco = preco;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+}
+
+class ImpostoVisitor implements Visitor {
+
+    @Override
+    public void visit(Livro livro) {
+        double imposto = livro.getPreco() * 0.05;
+        System.out.println("Imposto do Livro: R$ " + imposto);
+    }
+
+    @Override
+    public void visit(Eletronico eletronico) {
+        double imposto = eletronico.getPreco() * 0.15;
+        System.out.println("Imposto do Eletrônico: R$ " + imposto);
+    }
+}
+
+// MAIN
+public class Main {
+    public static void main(String[] args) {
+
+        Livro livro = new Livro(100);
+        Eletronico eletronico = new Eletronico(1000);
+
+        Visitor imposto = new ImpostoVisitor();
+
+        livro.accept(imposto);
+        eletronico.accept(imposto);
+    }
+}
